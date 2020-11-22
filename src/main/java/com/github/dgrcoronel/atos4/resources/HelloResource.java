@@ -1,4 +1,4 @@
-package com.github.dgrcoronel.atos4;
+package com.github.dgrcoronel.atos4.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
