@@ -1,45 +1,52 @@
 package com.github.dgrcoronel.atos4.domain;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
-public class Categoria implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
+public class Category extends PanacheEntityBase {
+
+    // private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nome;
+    public Long id;
 
-    public Categoria() {
+    public String name;
+
+    @ManyToMany(mappedBy = "categories")
+    public List<Product> products = new ArrayList<>();
+
+    public Category(){
     }
 
-    public Categoria(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
+    public Category(String name) {
+        this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    // public Long getId() {
+    //     return id;
+    // }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    // public String getName() {
+    //     return name;
+    // }
 
-    public String getNome() {
-        return nome;
-    }
+    // public void setName(String name) {
+    //     this.name = name.toUpperCase();
+    // }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    // public static update(Category category) {
+    //     category.upd
+    // }
 
     @Override
     public int hashCode() {
@@ -57,7 +64,7 @@ public class Categoria implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Categoria other = (Categoria) obj;
+        Category other = (Category) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -65,7 +72,5 @@ public class Categoria implements Serializable {
             return false;
         return true;
     }
-
-    
 
 }
